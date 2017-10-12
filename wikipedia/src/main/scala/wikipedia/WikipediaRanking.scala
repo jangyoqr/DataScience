@@ -61,7 +61,7 @@ class WikipediaRanking (val masterAddress: String) {
 
 object WikipediaRanking extends WikipediaRanking("local")
 
-object Wikipedia {
+object WikipediaRunner {
   def main(args: Array[String]) {
     val inputPath = args(0)
 
