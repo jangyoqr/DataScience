@@ -28,4 +28,4 @@ Build a jar file to submit it in the spark cluster by issuing `sbt package`. The
 ### Task 4
 Write a report why the three methods - `rankLangs, rankLangsUsingIndex, rankLangsReduceByKey` - of counting shows different performaces. To help you to dig into Spark detail, you can refer articles from web - [Google search result](https://goo.gl/eFzMcm)
 
-
+Ack. The contents and source codes are referenced from [coursera](https://www.coursera.org/learn/scala-spark-big-data/home/welcome)
