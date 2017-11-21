@@ -5,7 +5,7 @@ In this task, you will get to know Spark by exploring full-text Wikipedia articl
 ### Task 0
 * Download the target input file from the below link [http://alaska.epfl.ch/~dockermoocs/bigdata/wikipedia.dat](http://alaska.epfl.ch/~dockermoocs/bigdata/wikipedia.dat)
 * After downloading the file, upload the file to the HDFS, and capture the screenshot of `hdfs dfs -ls FILE_PATH` below
-![Image here]()
+<img src="스크린샷, 2017-11-02 19-58-20.png">
 
 ### Task 1
 You have to implement 5 functions to count the number of occurances of candidate languages. They are `occurrencesOfLang, rankLangs, makeIndex, rankLangsUsingIndex, rankLangsReduceByKey` in `wikipedia/src/main/scala/wikipedia/WikipediaRanking.scala` 
