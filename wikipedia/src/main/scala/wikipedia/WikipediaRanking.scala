@@ -30,31 +30,58 @@ class WikipediaRanking (val masterAddress: String) {
    *  Returns the number of articles on which the language `lang` occurs.
    *  Hint: consider using method `mentionsLanguage` on `WikipediaArticle`
    */
-  def occurrencesOfLang(lang: String, rdd: RDD[WikipediaArticle]): Int = ???
+   def occurrencesOfLang(lang: String, rdd: RDD[WikipediaArticle]): Int =
+{
+        val a = rdd.filter(x => x.mentionsLanguage(lang)==true)
+        return a.count().toInt
+}
+
+
 
   /* Problem 1: Use `occurrencesOfLang` to compute the ranking of the languages
    *     (`val langs`) by determining the number of Wikipedia articles that
    *     mention each language at least once. Don't forget to sort the
    *     languages by their occurrence, in decreasing order!
    */
-  def rankLangs(langs: List[String], rdd: RDD[WikipediaArticle]): List[(String, Int)] = ???
+   def rankLangs(langs: List[String], rdd: RDD[WikipediaArticle]): List[(String, Int)] =
+{
+        val a = langs.map(lang=>(lang,occurrencesOfLang(lang,rdd))).sortBy(x=>x._2).reverse
+        return a
+}
+
 
   /* Problem 2:
    * Compute an inverted index of the set of articles, mapping each language
    * to the Wikipedia pages in which it occurs.
-   */
-  def makeIndex(langs: List[String], rdd: RDD[WikipediaArticle]): RDD[(String, Iterable[WikipediaArticle])] = ???
+   */ def makeIndex(langs: List[String], rdd: RDD[WikipediaArticle]): RDD[(String, Iterable[WikipediaArticle])] =
+{
+        val a  = rdd.flatMap(news=> {
+        val b = langs.filter(lang=> news.mentionsLanguage(lang))
+        b.map(lang=> (lang,news))})
+        return a.groupByKey
+}
 
+  
   /* Problem 3: Compute the language ranking again, but now using the inverted index. Can you notice
    *     a performance improvement?
    */
-  def rankLangsUsingIndex(index: RDD[(String, Iterable[WikipediaArticle])]): List[(String, Int)] = ???
+   def rankLangsUsingIndex(index: RDD[(String, Iterable[WikipediaArticle])]): List[(String, Int)] = {
+        return index.mapValues(_.size).sortBy(-_._2).collect().toList
+}
+
 
   /* Problem 4: Use `reduceByKey` so that the computation of the index and the ranking are combined.
    *     Can you notice an improvement in performance compared to measuring *both* the computation of the index
    *     and the computation of the ranking?
    */
-  def rankLangsReduceByKey(langs: List[String], rdd: RDD[WikipediaArticle]): List[(String, Int)] = ???
+  def rankLangsReduceByKey(langs: List[String], rdd: RDD[WikipediaArticle]): List[(String, Int)] =
+{
+
+         rdd.flatMap(article => {
+      langs.filter(lang => article.mentionsLanguage(lang)).map((_, 1))
+         }).reduceByKey((x,y)=>x+y).sortBy(-_._2).collect().toList
+}
+
 
   def stopSC() = sc.stop()
 }
