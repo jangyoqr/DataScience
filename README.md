@@ -32,5 +32,6 @@ Write a report why the three methods - `rankLangs, rankLangsUsingIndex, rankLang
 <img src="reduceByKey.png">
 반면, groupByKey는 각 노드에 있는 데이터에 대해 바로 Shuffle 과정을 거치게 되고 결과를 내보냅니다. 따라서 groupByKey는 네트워크를 통해 전송되는 데이터의 양이 많아질 뿐만 아니라, Out of disk 문제가 발생할 수도 있습니다.
 <img src="groupByKey.png">
+따라서 이런 오버헤드의 차이 때문에 reduceByKey가 더 우수한 성능을 보입니다.
 
 Ack. The contents and source codes are referenced from [coursera](https://www.coursera.org/learn/scala-spark-big-data/home/welcome)
