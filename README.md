@@ -23,7 +23,7 @@ In the root folder (under `wikipedia`), run `sbt test` to confirm the compile wo
 
 ### Task 3
 Build a jar file to submit it in the spark cluster by issuing `sbt package`. The output jar file will be located in `wikipedia/target/scala-2.11/homework-2_2.11-0.1-SNAPSHOT.jar` . Using the file issue `spark-submit` command - `spark-submit --class wikipedia.WikipediaRunner --master spark://node-1:7077 JAR_FILE_LOCATION WIKIPEDIA_INPUT_DATASET_LOCATION` .  Capture the outcome from the execution that contains Language and count list with the running time of each method. Note that the captured image should contain the hostname of your test machines.
-![Image here]()
+<img src="스크린샷, 2017-11-22 14-32-13.png">
 
 ### Task 4
 Write a report why the three methods - `rankLangs, rankLangsUsingIndex, rankLangsReduceByKey` - of counting shows different performaces. To help you to dig into Spark detail, you can refer articles from web - [Google search result](https://goo.gl/eFzMcm). In the report, you have to write how you interpret and analyze the result by using Spark WebUI - screen capture is highly recommended.
